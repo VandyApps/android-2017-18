@@ -11,7 +11,7 @@ import android.widget.Toast;
 
 public class Wrapper extends AppCompatActivity {
 
-    private static final String VANDYVAS_URL = "https://vandyvans.com/m/routes";
+    private static final String VANDYVANS_URL = "https://vandyvans.com/m/routes";
     private WebView webView;
 
     @Override
@@ -24,6 +24,6 @@ public class Wrapper extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
 
-        webView.loadUrl(VANDYVAS_URL);
+        webView.loadUrl(VANDYVANS_URL);
     }
 }

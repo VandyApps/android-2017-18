@@ -30,14 +30,12 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
-        changeActivityButton.setOnClickListener(new OurListener());
-    }
-
-    public class OurListener implements View.OnClickListener {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent(MainActivity.this, Wrapper.class);
-            startActivity(intent);
-        }
+        changeActivityButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Wrapper.class);
+                startActivity(intent);
+            }
+        });
     }
 }
