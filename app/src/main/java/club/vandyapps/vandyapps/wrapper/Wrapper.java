@@ -1,4 +1,4 @@
-package club.vandyapps.vandyapps;
+package club.vandyapps.vandyapps.wrapper;
 
 import android.Manifest;
 import android.app.AlertDialog;
@@ -9,18 +9,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.webkit.GeolocationPermissions;
-import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.Button;
 import android.widget.Toast;
+
+import club.vandyapps.vandyapps.R;
 
 public class Wrapper extends AppCompatActivity {
 
-    private static final String VANDYVANS_URL = "https://vandyvans.com/m/routes";
+    private static final String VANDYVANS_URL = "https://vandyvans.com";
     private static final int VV_PERMISSION_ACCESS_FINE_LOCATION = 1;
     private WebView webView;
 
@@ -32,15 +29,7 @@ public class Wrapper extends AppCompatActivity {
         requestLocationPermission();
 
         webView = (WebView) findViewById(R.id.webview);
-        WebSettings webSettings = webView.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        webSettings.setGeolocationEnabled(true);
-        webView.setWebChromeClient(new WebChromeClient() {
-            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-                callback.invoke(origin, true, false);
-            }
-        });
-
+        setupWebView();
         webView.loadUrl(VANDYVANS_URL);
     }
 
@@ -98,5 +87,14 @@ public class Wrapper extends AppCompatActivity {
                 }
             }
         }
+    }
+
+    private void setupWebView() {
+        webView.setWebViewClient(new WrapperWebViewClient());
+        webView.setWebChromeClient(new WrapperWebChromeClient());
+
+        WebSettings webSettings = webView.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setGeolocationEnabled(true);
     }
 }
